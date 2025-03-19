@@ -1,11 +1,11 @@
-/* eslint-disable no-unused-vars */
 import styled from 'styled-components';
 import Cards from '../components/UI/Cards';
 import { IconAlertCircle, IconMail, IconMessage } from '@tabler/icons-react';
 import ContactForm from '../components/UI/ContactForm';
 import FaqItem from '../components/UI/FaqItem';
 import NewsletterForm from '../components/UI/NewsLetterForm';
-import { localH, ngrok } from '../components/utils/utils';
+import PropTypes from 'prop-types';
+
 
 const MainContainer = styled.div`
     width: 100%;
@@ -81,9 +81,8 @@ const Title = styled.h1`
     }
 `;
 
-const URL = ngrok;
 
-export default function ContactPage () {
+export default function ContactPage ({URL}) {
     
     const faqs = [
         {
@@ -162,4 +161,8 @@ export default function ContactPage () {
 
         </MainContainer>
     );
+}
+
+ContactPage.propTypes = {
+    URL: PropTypes.string.isRequired,
 }

@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import { useState, useEffect, useRef} from 'react';
+import { useState, useRef} from 'react';
 import styled from 'styled-components';
 import SignDetector from '../components/UI/SignDetector';
 import Cards from '../components/UI/Cards';
@@ -9,9 +8,9 @@ import useSignDetector from '../hooks/useSignDetection';
 import Overlay from '../components/UI/Overlay';
 import letterTips from '../assets/jsons/tips.json';
 import words from '../assets/jsons/words.json';
-import { localH, websocketURL } from '../components/utils/utils';
 import { useTimeSpent, usePredictionCheck, useValidImages, useAllLettersCorrect } from '../hooks/useLearnPage';
 import useTranscriptionHandlers from '../hooks/useTranscribeHandlers';
+import PropTypes from 'prop-types';
 
 const MainContainer = styled.div`
     width: 100%;
@@ -190,13 +189,13 @@ const Cursor = styled.span`
     }
 `;
 
-export default function LearnPage() {
+export default function LearnPage({URL}) {
     const [selectedLetter, setSelectedLetter] = useState("A");
     const [showImages, setShowImages] = useState(false);
     const [lessonType, setLessonType] = useState('letters');
     const webcamRef = useRef(null);
     const textAreaRef = useRef(null);
-    const { prediction, cameraOn, startCamera, stopCamera } = useSignDetector(websocketURL);
+    const { prediction, cameraOn, startCamera, stopCamera } = useSignDetector(URL);
 
     const {
         transcribedText,
@@ -398,4 +397,8 @@ export default function LearnPage() {
             )}
         </>
     );
+}
+
+LearnPage.propTypes = {
+    URL: PropTypes.string.isRequired,
 }

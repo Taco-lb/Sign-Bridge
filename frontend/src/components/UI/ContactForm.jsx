@@ -95,7 +95,7 @@ export default function ContactForm({URL}) {
                                     type="email"
                                     name="email"
                                     placeholder="johndoe@email.com"
-                                    value={formData.email}
+                                    value={formData.email.toLowerCase()}
                                     onChange={handleChange}
                                     required
                                     disabled={loading}

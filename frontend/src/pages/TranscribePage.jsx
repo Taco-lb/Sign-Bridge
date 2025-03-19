@@ -1,14 +1,14 @@
-/* eslint-disable no-unused-vars */
 import styled from 'styled-components';
 import SignDetector from '../components/UI/SignDetector';
 import { useRef, useState } from 'react';
 import useSignDetector from '../hooks/useSignDetection';
 import Cards from '../components/UI/Cards';
 import { IconCopy, IconVolume, IconHistory, IconSettings, IconTrash, IconMicrophone, IconPlayerPause } from '@tabler/icons-react';
-import { localH, websocketURL} from '../components/utils/utils';
 import Notification from '../components/UI/Notification';
 import Dropdown from '../components/UI/Dropdown';
 import useTranscriptionHandlers from '../hooks/useTranscribeHandlers';
+import PropTypes from 'prop-types';
+
 
 const MainContainer = styled.div`
     width: 100%;
@@ -174,17 +174,15 @@ const Setting = styled.div`
     align-items: center;
 `;
 
-export default function TranscribePage() {
+export default function TranscribePage({URL}) {
     const [selectedLetter, setSelectedLetter] = useState("");
     const [detectionDelay, setDetectionDelay] = useState(2000);
     const textAreaRef = useRef(null);
     const webcamRef = useRef(null);
-    const { prediction, cameraOn, startCamera, stopCamera } = useSignDetector(websocketURL);
+    const { prediction, cameraOn, startCamera, stopCamera } = useSignDetector(URL);
     const {
         transcribedText,
-        setTranscribedText,
         recentTranscriptions,
-        selectedVoice,
         autoSpeak,
         setAutoSpeak,
         speechRate,
@@ -348,4 +346,8 @@ export default function TranscribePage() {
             <Notification autoClose={3000} closeOnClick={true} position='top-right'/>
         </>
     );
+}
+
+TranscribePage.propTypes = {
+    URL: PropTypes.string.isRequired,
 }
