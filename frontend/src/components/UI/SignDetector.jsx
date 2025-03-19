@@ -159,7 +159,9 @@ export default function SignDetector({ selectedLetter, setSelectedLetter, webcam
 
                     <PlaceholderCamera $visible={!cameraOn} $simplified={simplified}>
                         <div>Camera Feed <IconCamera /> </div>
-                        <div style={{fontSize:'1rem'}}>(Press the play button to start)</div>
+                        <div style={{fontSize:'1rem'}}>(Press the play button to start or</div>
+                        <div style={{fontSize:'1rem'}}> the info button for help) </div>
+                            
                     </PlaceholderCamera>
 
                     <ButtonWrapper>
