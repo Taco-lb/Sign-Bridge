@@ -1,0 +1,39 @@
+{
+    "HELLO": [
+        "Start with the letter H.",
+        "Follow with the letter E.",
+        "Then the letter L.",
+        "Repeat the letter L.",
+        "End with the letter O."
+    ],
+    "WORLD": [
+        "Start with the letter W.",
+        "Follow with the letter O.",
+        "Then the letter R.",
+        "Next is the letter L.",
+        "End with the letter D."
+    ],
+    "LEARN": [
+        "Start with the letter L.",
+        "Follow with the letter E.",
+        "Then the letter A.",
+        "Next is the letter R.",
+        "End with the letter N."
+    ],
+    "SIGN": [
+        "Start with the letter S.",
+        "Follow with the letter I.",
+        "Then the letter G.",
+        "End with the letter N."
+    ],
+    "LANGUAGE": [
+        "Start with the letter L.",
+        "Follow with the letter A.",
+        "Then the letter N.",
+        "Next is the letter G.",
+        "Follow with the letter U.",
+        "Then the letter A.",
+        "Next is the letter G.",
+        "End with the letter E."
+    ]
+}

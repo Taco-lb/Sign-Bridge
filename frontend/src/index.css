@@ -1,0 +1,80 @@
+:root {
+	--text-light: #ffffff;
+	--background-1: #ffffff;
+	--background-2: #f8f8f8;
+	--text-dark: #202020;
+	--text-middle:#374151;
+	--main-color: #3B82F6;
+	--secondary-color: #111827;
+	--third-color:#1F2937;
+	--text-gray:#677489;
+	--accent-1: #6C5B7B;
+	--accent-2: #B89F6E;
+	--hover: #2563EB;
+	--disabled: #888888;
+
+
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	/* Minimalist Scrollbar for WebKit browsers */
+	::-webkit-scrollbar {
+		width: 0px;
+		height: 0px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: var(--main-color);
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: var(--secondary-color);
+		border-radius: 4px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: var(--hover);
+	}
+}
+
+a {
+	font-weight: 500;
+	color: var(--main-color);
+	text-decoration: inherit;
+}
+a:hover {
+	color: var(--secondary-color);
+}
+
+body {
+	margin: 0;
+	display: flex;
+	place-items: center;
+	min-width: 320px;
+	min-height: 100vh;
+}
+
+h1 {
+	font-size: 3.2em;
+	line-height: 1.1;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		color: var(--text-light);
+		background-color: var(--text-dark);
+	}
+	a:hover {
+		color: var(--accent-color);
+	}
+	button {
+		background-color: var(--secondary-color);
+		color: var(--text-light);
+	}
+}
