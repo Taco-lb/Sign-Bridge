@@ -150,7 +150,7 @@ const Text = styled.p`
 
 const Title = styled.h1`
     margin: 0;
-    color: var(--text-light);
+    color: ${({$color}) => ($color || "var(--text-light)")};
     font-size: 2.25rem;
 
     @media (max-width: 768px) {
@@ -354,8 +354,9 @@ export default function LearnPage({URL}) {
                     </SectionContainer>
                 </SectionBackground>
                 <SectionBackground>
-                    <SectionContainer>
-                        <CardContainer $gapSize="2rem" $width="100%" $justType="center">
+                    <SectionContainer $flexDir="column">
+                        <Title $color="var(--text-dark)">Select the Level of Difficulty</Title>
+                        <CardContainer $gapSize="2rem" $width="100%" $justType="center" $flexDir="row">
                             <Cards
                                 bgColor={"var(--background-1)"}
                                 type={'lesson'}
