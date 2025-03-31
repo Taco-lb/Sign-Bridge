@@ -1,6 +1,6 @@
-# SignBridge
+# Sign Bridge
 
-# Senior Computer Science Project by Antoine M. Harb
+## A Senior Computer Science Project by Antoine M. Harb
 
 ## 📌 Project Overview
 Sign Bridge is a **sign language recognition application** that provides learning options for the **American Sign Language (ASL)** while also providing transcription into text and speech. It aims to bridge communication gaps for the Deaf and Hard of Hearing (DHH) community using **machine learning**, specfically **deep learning**, and **computer vision**.
@@ -38,6 +38,7 @@ SignBridge/
 │   │── app.py              # Main Flask app
 │   │── email_handler.py    # Handles the email requests that are done through the website 
 │   │── newsletter.py       # Handles the newsletter MongoDB storage connection
+│   │── requirements.txt    # requirements to run and use python backend
 │   └── sign_detection.py   # ASL recognition logic
 │
 │── frontend/               # React-based frontend
@@ -68,7 +69,7 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt # Install all of the requirements to run the python backend
 python app.py  # Start the backend
 #or
-flask run --host=0.0.0.0 --port=5000 #start the backend with flask
+flask run --host=0.0.0.0 --port=5000 #start the backend with flask (suggested)
 ```
 
 ### **3️⃣ Frontend Setup**
@@ -78,9 +79,48 @@ cd frontend
 npm install
 npm run dev  # Start the frontend
 #or
-vite --host #to run vite hosting server
+vite --host #to run vite hosting server (suggested)
 ```
 
+### **4️⃣ Ngrok Setup - Testing on Apple devices remotely through WSS**
+> **Note:** If you decide to run this locally, create in *frontend* '.env' file to create localhost backend and frontend urls!
+> **Prerequisites:** Install the latest version of Ngrok and setup. Then follow these instructions
+
+#### **1. Create Ngrok Config file**
+Run this on terminal
+```sh
+ngrok config add-authtoken YOUR_NGROK_AUTH_TOKEN
+```
+Then, create or edit the Ngrok config file:
+
+- On Linux/macOS, it's located at ~/.ngrok2/ngrok.yml
+
+- On Windows, it's located at C:\Users\YourUser\.ngrok2\ngrok.yml
+
+Edit and add this:
+
+```yaml
+version: "2"
+authtoken: YOUR_NGROK_AUTH_TOKEN
+
+tunnels:
+frontend:
+    addr: 5173
+    proto: http
+backend:
+    addr: 5000
+    proto: http
+```
+
+#### **2. Run all of the ports from ngrok terminal**
+
+```sh
+ngrok start --all
+```
+
+You can create a '.env' file in the *frontend* where you can store the newly created 'VITE_API_NGROK' (copy the backend port URL for this variable) 
+
+Use the frontend port URL to run the application on any device !
 ---
 
 ## 📸 Demo (Screenshots)
