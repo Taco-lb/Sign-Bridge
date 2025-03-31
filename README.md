@@ -93,9 +93,9 @@ ngrok config add-authtoken YOUR_NGROK_AUTH_TOKEN
 ```
 Then, create or edit the Ngrok config file:
 
-- On Linux/macOS, it's located at ~/.ngrok2/ngrok.yml
-
-- On Windows, it's located at C:\Users\YourUser\.ngrok2\ngrok.yml
+- On Linux, it's located at ~/.config/ngrok/ngrok.yml
+- On MacOS (Darwin), it's located at ~/Library/Application Support/ngrok/ngrok.yml
+- On Windows, it's located at %HOMEPATH%\AppData\Local\ngrok\ngrok.yml
 
 Edit and add this:
 
@@ -117,12 +117,14 @@ backend:
 ```sh
 ngrok start --all
 ```
+
 - You can create a '.env' file in the *frontend* where you can store the newly created 'VITE_API_NGROK' (copy the backend port URL for this variable).
 - Use the frontend port URL to run the application on any device.
 
 ---
 
 ## 📸 Demo (Screenshots)
+> Left Web, Right Mobile
 ![Sign Bridge Demo](https://github.com/user-attachments/assets/5506ab05-67a2-4af4-b971-41222ea0f06d) 
 ![Sign Bridge Learn](https://github.com/user-attachments/assets/de16369d-f2a2-43d2-ab29-f8161eaa4a80)
 ![Sign Bridge Transcribe](https://github.com/user-attachments/assets/2a2a1719-b6cb-4e73-8361-30fe2917c335)
