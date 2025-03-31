@@ -125,9 +125,13 @@ ngrok start --all
 
 ## 📸 Demo (Screenshots)
 > Left Web, Right Mobile
-![Sign Bridge Demo](https://github.com/user-attachments/assets/5506ab05-67a2-4af4-b971-41222ea0f06d) 
+#### **Home Page**
+![Sign Bridge Demo](https://github.com/user-attachments/assets/5506ab05-67a2-4af4-b971-41222ea0f06d)
+#### **Learn Page**
 ![Sign Bridge Learn](https://github.com/user-attachments/assets/de16369d-f2a2-43d2-ab29-f8161eaa4a80)
+#### **Transcribe Page**
 ![Sign Bridge Transcribe](https://github.com/user-attachments/assets/2a2a1719-b6cb-4e73-8361-30fe2917c335)
+#### **Contact Page**
 ![Sign Bridge Contact](https://github.com/user-attachments/assets/7d08289d-bb82-4595-8b80-7ee620d8fb8a)
 ---
 
