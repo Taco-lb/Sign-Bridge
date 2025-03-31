@@ -118,9 +118,7 @@ backend:
 ngrok start --all
 ```
 
-You can create a '.env' file in the *frontend* where you can store the newly created 'VITE_API_NGROK' (copy the backend port URL for this variable) 
-
-Use the frontend port URL to run the application on any device !
+You can create a '.env' file in the *frontend* where you can store the newly created 'VITE_API_NGROK' (copy the backend port URL for this variable). Use the frontend port URL to run the application on any device !
 ---
 
 ## 📸 Demo (Screenshots)
