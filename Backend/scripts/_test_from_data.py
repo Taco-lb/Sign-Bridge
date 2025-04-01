@@ -1,75 +1,112 @@
 import os
-from cvzone.HandTrackingModule import HandDetector
-from cvzone.ClassificationModule import Classifier
 import numpy as np
 import cv2
+from cvzone.HandTrackingModule import HandDetector
+from cvzone.ClassificationModule import Classifier
+from sklearn.metrics import classification_report, confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
 
-# Define label mapping (Make sure it's in the same order as training labels)
 LABELS_FULL = [
     "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", 
-    "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", 
-    "del", "nothing", "space"
+    "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
 ]
 
-# Initialize hand detector and classifier
+# Initialize components
 detector = HandDetector(maxHands=1)
-classifier = Classifier("../model/asl_model_augmented_1.keras")
+classifier = Classifier("./backend/model/asl_model_augmented_1.keras") 
 
-# Define folder containing test images
-test_folder = "E:/DataSets/dataset FULL/asl_alphabet_test/asl_alphabet_test"  # Replace with your test folder path
-
-# Parameters
-offset = 25 
+# Test folder configuration
+test_folder = "E:/DataSets/dataset 2 ASL/asl_alphabet_test"
+offset = 25
 img_size = 200
 
-# Counter for numbering predictions
-counter = 1
+# Storage for metrics
+true_labels = []
+predicted_labels = []
+failed_images = []
 
-# Loop through all images in the test folder
+def get_true_label(filename):
+    return filename.split('_')[0].upper()
+
+# Process test images
 for filename in os.listdir(test_folder):
-    if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif')):
-        # Read the image
+    if not filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif')):
+        continue
+    
+    try:
+        true_label = get_true_label(filename)
+        if true_label not in LABELS_FULL:
+            continue
+            
         img_path = os.path.join(test_folder, filename)
         img = cv2.imread(img_path)
         
         if img is None:
-            print(f"Failed to read image: {filename}")
+            failed_images.append(filename)
             continue
         
-        # Detect hands in the image
-        hands, img = detector.findHands(img)
+        hands, _ = detector.findHands(img)
         
         if hands:
             hand = hands[0]
             x, y, w, h = hand['bbox']
-
-            # Ensure cropping stays within image bounds
-            y1, y2 = max(0, y - offset), min(img.shape[0], y + h + offset)
-            x1, x2 = max(0, x - offset), min(img.shape[1], x + w + offset)
+            
+            # Safe cropping
+            y1 = max(0, y - offset)
+            y2 = min(img.shape[0], y + h + offset)
+            x1 = max(0, x - offset)
+            x2 = min(img.shape[1], x + w + offset)
             img_crop = img[y1:y2, x1:x2]
-
-            # Resize the cropped image
-            img_crop_resized = cv2.resize(img_crop, (img_size, img_size))
-            img_white = np.ones((img_size, img_size, 3), np.uint8) * 255
-            img_white[0: img_size, 0: img_size] = img_crop_resized
             
             # Process landmarks
-            if hand:
-                lm_list = hand["lmList"]  # List of 21 hand landmarks
-                if len(lm_list) == 21:  # Ensure all 21 landmarks are detected
-                    keypoints = np.array(lm_list)[:, :3].flatten()  # Extract only (x, y, z)
-                    keypoints = np.expand_dims(keypoints, axis=0)  # Reshape for model input
-
-                    prediction = classifier.model.predict(keypoints)
-                    index = np.argmax(prediction)
-                    predicted_letter = LABELS_FULL[index]  # Convert index to letter
-
-                    # Print the result to the console
-                    print(f"{counter}. {predicted_letter}")
+            lm_list = hand["lmList"]
+            if len(lm_list) == 21:
+                keypoints = np.array(lm_list)[:, :3].flatten()
+                prediction = classifier.model.predict(np.expand_dims(keypoints, axis=0), verbose=0)[0]
+                predicted_index = np.argmax(prediction)
+                
+                # Store for metrics
+                true_labels.append(LABELS_FULL.index(true_label))
+                predicted_labels.append(predicted_index)
         else:
-            # No hand detected
-            print(f"{counter}. No hand detected")
-        
-        counter += 1  # Increment the counter
+            failed_images.append(filename)
+    except Exception as e:
+        print(f"Error processing {filename}: {str(e)}")
+        failed_images.append(filename)
 
-print("Testing complete.")
+# Performance Metrics
+if len(true_labels) == 0:
+    raise ValueError("No valid test cases processed - check your test folder and hand detection")
+
+# Find ACTUAL classes present in predictions
+used_classes = np.unique(np.concatenate([true_labels, predicted_labels]))
+print(f"\nModel is working with {len(used_classes)} classes:")
+print([LABELS_FULL[i] for i in used_classes])
+
+# Generate classification report with proper alignment
+print("\n=== Classification Report ===")
+print(classification_report(
+    true_labels,
+    predicted_labels,
+    labels=used_classes,
+    target_names=[LABELS_FULL[i] for i in used_classes],
+    zero_division=0
+))
+
+# Confusion Matrix
+plt.figure(figsize=(12, 12))
+cm = confusion_matrix(true_labels, predicted_labels, labels=used_classes)
+disp = ConfusionMatrixDisplay(
+    confusion_matrix=cm,
+    display_labels=[LABELS_FULL[i] for i in used_classes]
+)
+disp.plot(cmap='Blues', values_format='d', xticks_rotation=45)
+plt.title("ASL Classification Confusion Matrix")
+plt.tight_layout()
+plt.savefig('asl_confusion_matrix.png', dpi=300, bbox_inches='tight')
+print("\nConfusion matrix saved to 'asl_confusion_matrix.png'")
+
+# Error Analysis
+print(f"\nFailed to process {len(failed_images)} images:")
+if len(failed_images) > 0:
+    print("Sample failures:", failed_images[:10])
