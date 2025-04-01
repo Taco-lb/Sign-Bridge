@@ -8,19 +8,17 @@ import matplotlib.pyplot as plt
 
 LABELS_FULL = [
     "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", 
-    "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+    "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
+    "space", "del", "nothing"
 ]
 
-# Initialize components
 detector = HandDetector(maxHands=1)
 classifier = Classifier("./backend/model/asl_model_augmented_1.keras") 
 
-# Test folder configuration
-test_folder = "E:/DataSets/dataset 2 ASL/asl_alphabet_test"
+test_folder = "E:/DataSets/dataset 2 ASL/asl_alphabet_train/TEST 2"
 offset = 25
 img_size = 200
 
-# Storage for metrics
 true_labels = []
 predicted_labels = []
 failed_images = []
@@ -28,7 +26,7 @@ failed_images = []
 def get_true_label(filename):
     return filename.split('_')[0].upper()
 
-# Process test images
+# Process test images from the directory
 for filename in os.listdir(test_folder):
     if not filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif')):
         continue
@@ -51,7 +49,6 @@ for filename in os.listdir(test_folder):
             hand = hands[0]
             x, y, w, h = hand['bbox']
             
-            # Safe cropping
             y1 = max(0, y - offset)
             y2 = min(img.shape[0], y + h + offset)
             x1 = max(0, x - offset)
@@ -65,7 +62,6 @@ for filename in os.listdir(test_folder):
                 prediction = classifier.model.predict(np.expand_dims(keypoints, axis=0), verbose=0)[0]
                 predicted_index = np.argmax(prediction)
                 
-                # Store for metrics
                 true_labels.append(LABELS_FULL.index(true_label))
                 predicted_labels.append(predicted_index)
         else:
@@ -73,6 +69,7 @@ for filename in os.listdir(test_folder):
     except Exception as e:
         print(f"Error processing {filename}: {str(e)}")
         failed_images.append(filename)
+
 
 # Performance Metrics
 if len(true_labels) == 0:
