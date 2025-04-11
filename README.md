@@ -141,13 +141,18 @@ ngrok start --all
 3. Commit your changes: `git commit -m "Add new feature"`
 4. Push to the branch: `git push origin feature-branch`
 5. Open a Pull Request.
-
 ---
-
-## 📜 License
-This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
-
 --- -->
+
+## 📄 License
+
+This project is **not open source**.  
+Code is provided for reference only — **do not reuse, copy, or modify** without permission.
+
+📬 Contact for permission:
+- Email: antoinemharb@outlook.com
+- GitHub: [Taco-lb](https://github.com/Taco-lb)
+- LinkedIn: https://www.linkedin.com/in/antoinemharb/
 
 ## 🌎 Connect with Me
 🔗 [LinkedIn](https://www.linkedin.com/in/antoinemharb/)  
