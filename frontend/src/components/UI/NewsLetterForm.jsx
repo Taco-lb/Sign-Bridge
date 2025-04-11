@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Button from './Button';
 import useNewsletter from '../../hooks/useNewsLetter';
-import Notification from './Notification';
 import PropTypes from 'prop-types';
 
 const FormContainer = styled.div`
@@ -45,7 +44,6 @@ export default function NewsletterForm({URL}) {
                     </Button>
                 </form>
             </FormContainer>
-            <Notification autoClose={3000} closeOnClick={true} position='top-right'/>
         </>
     );
 }

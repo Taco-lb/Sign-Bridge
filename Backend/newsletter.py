@@ -29,7 +29,7 @@ def subscribe_newsletter(data):
         return jsonify({'message': 'Email is required'}), 400
 
     try:
-        #CHeck if user exists and if not add him to the db
+        #Check if user exists and if not add him to the db
         if subscribers_collection.find_one({'email': email}):
             return jsonify({'message': 'Email already subscribed'}), 400
 

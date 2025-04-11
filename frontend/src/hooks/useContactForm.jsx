@@ -57,12 +57,12 @@ const useContactForm = (URL) => {
                     subject: options[0],
                     message: '',
                 });
-            } else {
-                notify("error", "Failed", "Failed to send message. Please try again.");
+            }
+            else{
+                notify('error','Failed',`${result.message || 'Failed to send request. Please try again.'}`);
             }
         } catch (error) {
-            console.error('Error:', error);
-            notify("error", "Error", "An error occurred. Please try again.");
+            notify("error", "Error", `${error || 'An error occurred. Please try again.'}`);
         } finally {
             setLoading(false);
         }

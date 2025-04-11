@@ -3,7 +3,6 @@ import Cards from './Cards';
 import Button from './Button';
 import Dropdown from './Dropdown';
 import useContactForm from '../../hooks/useContactForm';
-import Notification from './Notification';
 import Loader from './Loader';
 import PropTypes from 'prop-types';
 
@@ -145,7 +144,6 @@ export default function ContactForm({URL}) {
                     </Form>
                 </Cards>
             </MainContainer>
-            <Notification autoClose={3000} closeOnClick={true} position='top-right'/>
         </>
     );
 }

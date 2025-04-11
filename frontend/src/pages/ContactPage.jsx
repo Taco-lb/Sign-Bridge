@@ -5,6 +5,7 @@ import ContactForm from '../components/UI/ContactForm';
 import FaqItem from '../components/UI/FaqItem';
 import NewsletterForm from '../components/UI/NewsLetterForm';
 import PropTypes from 'prop-types';
+import Notification from '../components/UI/Notification';
 
 
 const MainContainer = styled.div`
@@ -158,7 +159,8 @@ export default function ContactPage ({URL}) {
                     </FAQContainer>
                 </SectionContainer>
             </SectionBackground>
-
+            <Notification autoClose={2000} closeOnClick={true} position='top-right'/>
+            
         </MainContainer>
     );
 }

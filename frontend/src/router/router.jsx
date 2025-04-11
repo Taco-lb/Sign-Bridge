@@ -7,8 +7,8 @@ import TranscribePage from '../pages/TranscribePage';
 import ContactPage from '../pages/ContactPage';
 import { localH, websocketURL, ngrok } from '../components/utils/utils';
 
-const URL = localH;
-const URL_CONTACT = localH;
+const URL = ngrok;
+const URL_CONTACT = ngrok;
 
 export const ROUTER = createBrowserRouter([
     {
