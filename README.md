@@ -152,7 +152,7 @@ Code is provided for reference only — **do not reuse, copy, or modify** withou
 📬 Contact for permission:
 - Email: antoinemharb@outlook.com
 - GitHub: [Taco-lb](https://github.com/Taco-lb)
-- LinkedIn: [LinkedIn](https://www.linkedin.com/in/antoinemharb/)
+- LinkedIn: [Antoine M. Harb](https://www.linkedin.com/in/antoinemharb/)
 
 ## 🌎 Connect with Me
 🔗 [LinkedIn](https://www.linkedin.com/in/antoinemharb/)  
