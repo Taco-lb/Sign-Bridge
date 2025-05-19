@@ -73,7 +73,7 @@ flask run --host=0.0.0.0 --port=5000 #start the backend with flask (suggested)
 ```
 
 ### **3️⃣ Frontend Setup**
-> **Prerequisites:** Node.js (v21+), npm  
+> **Prerequisites:** React.js (v18+), npm (v11+) 
 ```sh
 cd frontend
 npm install
